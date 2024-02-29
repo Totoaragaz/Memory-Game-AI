@@ -5,9 +5,11 @@
     <title>Results</title>
 </head>
 <body>
-<h2>Results</h2>
+<h1>Results</h1>
 <br><br>
-<a th:text="${winner}"></a>
+For <span th:text="${pairNr}"></span> pairs and  <span th:text="${gameNr}"></span> games.
+<br><br>
+Player 1:<span style="color:blue" th:text="${p1Wins}"></span> Wins | Player 2: <span style="color:red" th:text="${p2Wins}"></span> Wins | Draws:<span th:text="${draws}"></span>
 <br>
 <button type="submit" id="backButton">Back</button>
 </body>
