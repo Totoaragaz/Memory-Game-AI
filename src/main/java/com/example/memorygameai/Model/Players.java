@@ -30,12 +30,12 @@ public class Players {
         return seenCards;
     }
 
-    public void addPointPlayer1() {
-        player1points++;
-    }
-
-    public void addPointPlayer2() {
-        player1points++;
+    public void addPointToPlayer(int player) {
+        if (player == 1) {
+            player1points++;
+        } else {
+            player2points++;
+        }
     }
 
     public void setSeenCards(int[] seenCards) {
@@ -45,33 +45,35 @@ public class Players {
     public Players(int pairNr) {
         this.player1points = 0;
         this.player2points = 0;
-        this.seenCards = new int[pairNr];
-        for (int i = 0; i < pairNr; i++) {
+        this.seenCards = new int[pairNr * 2];
+        for (int i = 0; i < pairNr * 2; i++) {
             this.seenCards[i] = -1;
         }
     }
 
-    public void rememberCard(int value) {
-        for (int i = 0; i < this.seenCards.length; i++) {
-            if (seenCards[i] == -1) {
-                this.seenCards[i] = value;
-                break;
-            }
-        }
+    public void rememberCard(int index, int value) {
+        this.seenCards[index] = value;
     }
 
     /**
      * Checks for a pair in the seen cards
-     * @param value the value of searched card
-     * @return index of the found pair, -1 if no pair is found
+     * @return indexes of the found pair, [] if no pair is found
      */
-    public int checkForPair(int value) {
-        for (int i = 0; i < this.seenCards.length; i++) {
-            if (this.seenCards[i] == value) {
-                return this.seenCards[i];
+    public int[] checkForPair() {
+        for (int i = 0; i < this.seenCards.length - 1; i++) {
+            if (this.seenCards[i] < 0) {
+                for (int j = i + 1; j < this.seenCards.length; j++) {
+                    if (this.seenCards[i] == this.seenCards[j]) {
+                        return new int[]{i, j};
+                    }
+                }
             }
         }
+        return new int[0];
+    }
 
-        return -1;
+    public void removePair(int index1, int index2) {
+        this.seenCards[index1] = -2;
+        this.seenCards[index2] = -2;
     }
 }
