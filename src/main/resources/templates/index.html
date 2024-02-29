@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Memory AI</title>
@@ -7,12 +7,14 @@
 <body>
 <h1>Memory Game AI</h1>
 <br><br>
-<label for="pairNumber"> Number of Pairs</label>
-<input id="pairNumber">
-<br><br>
-<label for="gameNumber"> Number of Games</label>
-<input id="gameNumber">
-<br><br>
-<button id="playButton">Play</button>
+<form th:action="@{/results}">
+    <label for="pairNumber"> Number of Pairs</label>
+    <input id="pairNumber" th:name="pairNr">
+    <br><br>
+    <label for="gameNumber"> Number of Games</label>
+    <input id="gameNumber" th:name="gameNr">
+    <br><br>
+    <button type="submit" id="playButton">Play</button>
+</form>
 </body>
 </html>

@@ -8,8 +8,8 @@ class GameControllerTest {
 
     @Test
     public void oneRoundGameTest() {
-        GameController gameController = new GameController(1);
-        assertEquals(1, gameController.playGame());
+        GameController gameController = new GameController();
+        assertEquals(1, gameController.playGame(1));
     }
 
 }

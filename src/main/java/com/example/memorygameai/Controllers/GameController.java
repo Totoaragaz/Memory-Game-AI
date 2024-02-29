@@ -2,25 +2,23 @@ package com.example.memorygameai.Controllers;
 
 import com.example.memorygameai.Model.Game;
 
-import java.util.Random;
-
 public class GameController {
 
     private Game game;
     private int playerTurn;
     private boolean pairFound;
 
-    public GameController(int pairNr) {
-        this.game = new Game(pairNr);
-        this.playerTurn = 1;
-        this.pairFound = false;
+    public GameController() {
     }
 
     /**
      * Plays the game, Player 1 always starts
      * @return The number of the winning player, 0 for a draw
      */
-    public int playGame() {
+    public int playGame(int pairNr) {
+        this.game = new Game(pairNr);
+        this.playerTurn = 1;
+        this.pairFound = false;
         while (!this.game.isGameOver()) {
             playRound();
             if (!pairFound) {
@@ -40,14 +38,14 @@ public class GameController {
         pairFound = false;
         int[] potentialPair = game.getPlayers().checkForPair();
 
-        if (potentialPair.length == 2) {
+        if (potentialPair != null) {
             guessPair(potentialPair);
         } else {
             int[] firstCard = guessRandomCard();
             int[] newPotentialPair = game.getPlayers().checkForPair();
 
-            if (newPotentialPair.length == 2) {
-                guessPair(potentialPair);
+            if (newPotentialPair != null) {
+                guessPair(newPotentialPair);
             } else {
                 int[] secondCard = guessRandomCard();
 
@@ -60,6 +58,7 @@ public class GameController {
 
     private int[] guessRandomCard() {
         int cardIndex = game.getRandomCardIndex();
+        game.getPlayers().increaseSeenCards();
         int cardValue = game.getCards().getCards()[cardIndex];
         game.getPlayers().rememberCard(cardIndex, cardValue);
         return new int[]{cardIndex, cardValue};

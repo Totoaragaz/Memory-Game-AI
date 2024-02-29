@@ -47,18 +47,22 @@ public class Game {
         this.foundPairs++;
     }
 
+    /**
+     * Gets the index of a random card that has not yet been seen
+     * @return the index of the card
+     */
     public int getRandomCardIndex() {
         Random rng = new Random();
-        int index = rng.nextInt((cards.getPairNr() - foundPairs) * 2 + 1);
+        int index = rng.nextInt(cards.getPairNr() * 2 - players.getSeenCardNumber());
         for (int i = 0; i < cards.getCards().length; i++) {
-            if (players.getSeenCards()[i] < 0) {
+            if (players.getSeenCards()[i] == -1) {
+                if (index == 0) {
+                    return i;
+                }
                 index--;
-            }
-            if (index == 0) {
-                return i;
             }
         }
 
-        return -1;
+        return cards.getCards().length - 1;
     }
 }

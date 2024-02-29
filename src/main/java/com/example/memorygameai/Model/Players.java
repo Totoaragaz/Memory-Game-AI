@@ -1,14 +1,20 @@
 package com.example.memorygameai.Model;
 
 /**
- * Class for both players. Since they both see the same cards, and we are assuming optimal play, there is no need for each player to
- * remember their cards individually.
+ * Class for both players. Since they both see the same cards, and we are assuming optimal play,
+ * there is no need for each player to remember their cards individually.
  */
 public class Players {
 
     private int player1points;
     private int player2points;
+
+    /**
+     * The cards seen by both players. -2 means the pair was found, -1 is an unknown card, a positive number is
+     * the value of the card
+     */
     private int[] seenCards;
+    private int seenCardNumber;
 
     public int getPlayer1points() {
         return player1points;
@@ -29,6 +35,13 @@ public class Players {
     public int[] getSeenCards() {
         return seenCards;
     }
+    public int getSeenCardNumber() {
+        return seenCardNumber;
+    }
+
+    public void increaseSeenCards() {
+        this.seenCardNumber++;
+    }
 
     public void addPointToPlayer(int player) {
         if (player == 1) {
@@ -45,6 +58,7 @@ public class Players {
     public Players(int pairNr) {
         this.player1points = 0;
         this.player2points = 0;
+        this.seenCardNumber = 0;
         this.seenCards = new int[pairNr * 2];
         for (int i = 0; i < pairNr * 2; i++) {
             this.seenCards[i] = -1;
@@ -61,7 +75,7 @@ public class Players {
      */
     public int[] checkForPair() {
         for (int i = 0; i < this.seenCards.length - 1; i++) {
-            if (this.seenCards[i] < 0) {
+            if (this.seenCards[i] >= 0) {
                 for (int j = i + 1; j < this.seenCards.length; j++) {
                     if (this.seenCards[i] == this.seenCards[j]) {
                         return new int[]{i, j};
@@ -69,7 +83,7 @@ public class Players {
                 }
             }
         }
-        return new int[0];
+        return null;
     }
 
     public void removePair(int index1, int index2) {
