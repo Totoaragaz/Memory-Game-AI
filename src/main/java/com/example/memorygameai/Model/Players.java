@@ -8,7 +8,7 @@ public class Players {
 
     private int player1points;
     private int player2points;
-    private int[][] seenCards;
+    private int[] seenCards;
 
     public int getPlayer1points() {
         return player1points;
@@ -26,7 +26,7 @@ public class Players {
         this.player2points = player2points;
     }
 
-    public int[][] getSeenCards() {
+    public int[] getSeenCards() {
         return seenCards;
     }
 
@@ -38,25 +38,23 @@ public class Players {
         player1points++;
     }
 
-    public void setSeenCards(int[][] seenCards) {
+    public void setSeenCards(int[] seenCards) {
         this.seenCards = seenCards;
     }
 
     public Players(int pairNr) {
         this.player1points = 0;
         this.player2points = 0;
-        this.seenCards = new int[2][pairNr];
+        this.seenCards = new int[pairNr];
         for (int i = 0; i < pairNr; i++) {
-            this.seenCards[0][i] = -1;
-            this.seenCards[1][i] = -1;
+            this.seenCards[i] = -1;
         }
     }
 
-    public void rememberCard(int index, int value) {
-        for (int i = 0; i < this.seenCards[0].length; i++) {
-            if (seenCards[0][i] == -1) {
-                this.seenCards[0][i] = index;
-                this.seenCards[1][i] = value;
+    public void rememberCard(int value) {
+        for (int i = 0; i < this.seenCards.length; i++) {
+            if (seenCards[i] == -1) {
+                this.seenCards[i] = value;
                 break;
             }
         }
@@ -68,9 +66,9 @@ public class Players {
      * @return index of the found pair, -1 if no pair is found
      */
     public int checkForPair(int value) {
-        for (int i = 0; i < this.seenCards[0].length; i++) {
-            if (this.seenCards[1][i] == value) {
-                return this.seenCards[0][i];
+        for (int i = 0; i < this.seenCards.length; i++) {
+            if (this.seenCards[i] == value) {
+                return this.seenCards[i];
             }
         }
 
