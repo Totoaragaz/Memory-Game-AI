@@ -1,7 +1,5 @@
 package com.example.memorygameai.Model;
 
-import java.util.Random;
-
 public class Cards {
 
     private int pairNr;
@@ -11,16 +9,8 @@ public class Cards {
         return pairNr;
     }
 
-    public void setPairNr(int pairNr) {
-        this.pairNr = pairNr;
-    }
-
     public int[] getCards() {
         return cards;
-    }
-
-    public void setCards(int[] cards) {
-        this.cards = cards;
     }
 
     public Cards(int pairNr) {

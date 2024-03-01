@@ -20,16 +20,8 @@ public class Players {
         return player1points;
     }
 
-    public void setPlayer1points(int player1points) {
-        this.player1points = player1points;
-    }
-
     public int getPlayer2points() {
         return player2points;
-    }
-
-    public void setPlayer2points(int player2points) {
-        this.player2points = player2points;
     }
 
     public int[] getSeenCards() {
@@ -49,10 +41,6 @@ public class Players {
         } else {
             player2points++;
         }
-    }
-
-    public void setSeenCards(int[] seenCards) {
-        this.seenCards = seenCards;
     }
 
     public Players(int pairNr) {

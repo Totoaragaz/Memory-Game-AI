@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ResultsController {
 
     @RequestMapping("/results")
-    public String results(@RequestParam(value = "pairNr", required = true) String pairNr,
-                          @RequestParam(value = "gameNr", required = true) String gameNr,
+    public String results(@RequestParam(value = "pairNr") String pairNr,
+                          @RequestParam(value = "gameNr") String gameNr,
                           Model model)
     {
         boolean invalidArguments = false;

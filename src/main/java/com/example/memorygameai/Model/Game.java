@@ -13,24 +13,8 @@ public class Game {
         return cards;
     }
 
-    public void setCards(Cards cards) {
-        this.cards = cards;
-    }
-
-    public int getFoundPairs() {
-        return foundPairs;
-    }
-
-    public void setFoundPairs(int foundPairs) {
-        this.foundPairs = foundPairs;
-    }
-
     public Players getPlayers() {
         return players;
-    }
-
-    public void setPlayers(Players players) {
-        this.players = players;
     }
 
     public Game(int pairNr) {
